@@ -5,16 +5,18 @@
 # calculate result
 # print result to screen
 
-puts "--C-A-L-C-U-L-A-T-O-R--"
-puts "What is the first number:"
+
+
+puts '--C-A-L-C-U-L-A-T-O-R--'
+puts 'What is the first number:'
 
 number1 = gets.chomp
 
-puts "What is the second number:"
+puts 'What is the second number:'
 
 number2 = gets.chomp
 
-puts "What operation? [1]Add [2]Subtract [3]Multiply [4]Divide"
+puts 'What operation? [1]Add [2]Subtract [3]Multiply [4]Divide'
 
 operation = gets.chomp
 
@@ -35,4 +37,4 @@ else
   exit
 end
 
-puts 'Result => '+number1+' '+symbol+' '+number2+' = '+result.to_s
+puts 'Result => ' + number1 + ' ' + symbol + ' ' + number2 + ' = ' + result.to_s
