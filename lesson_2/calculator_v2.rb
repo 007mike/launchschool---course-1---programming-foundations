@@ -1,4 +1,4 @@
-# calculator.rb
+# calculator_v2.rb
 
 # ask user for 2 numbers
 # ask user for operation
@@ -44,6 +44,7 @@ end
 prompt("Hi, #{name}")
 
 loop do
+  
   number1 = ''
 
   loop do

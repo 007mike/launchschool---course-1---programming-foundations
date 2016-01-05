@@ -12,7 +12,7 @@ def valid_years?(number)
   (number.to_i.to_s == number) && (number.to_i > 0)
 end
 
-puts ('---Mortgage Calculator v1---')
+puts '---Mortgage Calculator v1---'
 
 loop do
   loan_amount = '0'
@@ -22,7 +22,7 @@ loop do
     loan_amount = gets.chomp
     if valid_amount?(loan_amount)
       break
-    else 
+    else
       prompt('Hmm... that doesn\' appear to be valid. ')
     end
   end
@@ -54,10 +54,10 @@ loop do
   monthly_interest_rate = (annual_interest_rate.to_f / 100) / 12
   loan_duration_months = loan_duration_years.to_i * 12
 
-  monthly_payment = loan_amount.to_f * 
-                    (monthly_interest_rate * 
-                    (1 + monthly_interest_rate)**loan_duration_months) / 
-                    ((1 + monthly_interest_rate)**loan_duration_months -1)
+  monthly_payment = loan_amount.to_f *
+                    (monthly_interest_rate *
+                    (1 + monthly_interest_rate)**loan_duration_months) /
+                    ((1 + monthly_interest_rate)**loan_duration_months - 1)
 
   puts "\n"
   prompt("Loan amount:\t\t $#{loan_amount}")
@@ -72,7 +72,3 @@ loop do
 end
 
 prompt('Thanks for using ---Mortgage Calculator v1---. Good bye!')
-
-
-
-
