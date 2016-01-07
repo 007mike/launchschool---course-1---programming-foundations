@@ -1,22 +1,24 @@
 # paper_rock_scissors.rb
 
-ACCEPTED_ANSWERS = ['paper', 'rock', 'scissors']
+ACCEPTED_ANSWERS = %w(paper rock scissors)
 
 def prompt(text)
   puts "=> #{text}"
 end
 
+def win?(player1, player2)
+  (player1 == 'paper' && player2 == 'rock') ||
+    (player1 == 'rock' && player2 == 'scissors') ||
+    (player1 == 'scissors' && player2 == 'paper')
+end
+
 def print_who_wins(human, computer)
-  if (human == 'paper' && computer == 'rock') ||
-      (human == 'rock' && computer == 'scissors') ||
-      (human == 'scissors' && computer == 'paper')
-      prompt('Congratulations, you won!')
-  elsif (human == 'paper' && computer == 'scissors') ||
-      (human == 'rock' && computer == 'paper') ||
-      (human == 'scissors' && computer == 'rock')
-      prompt('Sorry, computer wins!')
+  if win?(human, computer)
+    prompt('Congratulations, you won!')
+  elsif win?(computer, human)
+    prompt('Sorry, computer wins!')
   else
-      prompt('The game was a draw!')
+    prompt('The game was a draw!')
   end
 end
 
@@ -26,7 +28,7 @@ loop do
   human_choice = ''
 
   loop do
-    prompt("Please choose one of the following: #{ACCEPTED_ANSWERS.join(" ,")}")
+    prompt("Please choose one of the following: #{ACCEPTED_ANSWERS.join(' ,')}")
     human_choice = gets.chomp.downcase
 
     if ACCEPTED_ANSWERS.include?(human_choice)
