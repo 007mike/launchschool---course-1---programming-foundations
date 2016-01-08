@@ -1,6 +1,7 @@
 # paper_rock_scissors.rb
 
 ACCEPTED_ANSWERS = %w(paper rock scissors)
+
 score_human = 0
 score_computer = 0
 
@@ -24,7 +25,16 @@ def print_who_wins(human, computer)
   end
 end
 
-prompt('---Paper Rock Scissors--v1--')
+def keep_score(player1, player2, score1, score2)
+  if win?(player1, player2)
+    score1 += 1
+  elsif win?(player2, player1)
+    score2 += 1
+  end
+end
+
+
+prompt('---Paper Rock Scissors--v2-Bonus-')
 
 loop do
   human_choice = ''
@@ -46,11 +56,7 @@ loop do
 
   print_who_wins(human_choice, computer_choice)
 
-  if win?(human_choice, computer_choice)
-    score_human += 1
-  elsif win?(computer_choice, human_choice)
-    score_computer += 1
-  end
+  keep_score(human_choice, computer_choice, score_human, score_computer)
 
   prompt("Current Score -> You: #{score_human} || Computer: #{score_computer}")
 
