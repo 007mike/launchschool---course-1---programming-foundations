@@ -1,7 +1,7 @@
 # paper_rock_scissors.rb
 
 ACCEPTED_ANSWERS = %w(p r s l sp)
-answers_long = {p: 'paper', r: 'rock', s: 'scissors', l: 'lizard', sp: 'spock'}
+answers_long = { p: 'paper', r: 'rock', s: 'scissors', l: 'lizard', sp: 'spock' }
 
 def prompt(text)
   puts "=> #{text}"
@@ -9,15 +9,15 @@ end
 
 def win?(player1, player2)
   (player1 == 'p' && player2 == 'r') ||
-  (player1 == 'p' && player2 == 'sp') ||
-  (player1 == 'r' && player2 == 's') ||
-  (player1 == 'r' && player2 == 'l') ||
-  (player1 == 's' && player2 == 'p') ||
-  (player1 == 's' && player2 == 'l') ||
-  (player1 == 'l' && player2 == 'p') ||
-  (player1 == 'l' && player2 == 'sp') ||
-  (player1 == 'sp' && player2 == 'r') ||
-  (player1 == 'sp' && player2 == 's')
+    (player1 == 'p' && player2 == 'sp') ||
+    (player1 == 'r' && player2 == 's') ||
+    (player1 == 'r' && player2 == 'l') ||
+    (player1 == 's' && player2 == 'p') ||
+    (player1 == 's' && player2 == 'l') ||
+    (player1 == 'l' && player2 == 'p') ||
+    (player1 == 'l' && player2 == 'sp') ||
+    (player1 == 'sp' && player2 == 'r') ||
+    (player1 == 'sp' && player2 == 's')
 end
 
 def print_who_wins(human, computer)
@@ -34,7 +34,7 @@ def keep_score(player1, player2, scores)
   if win?(player1, player2)
     scores[:human] += 1
   elsif win?(player2, player1)
-    scores[:computer] +=1
+    scores[:computer] += 1
   end
 end
 
@@ -47,7 +47,7 @@ def short_name_to_long(choice, name)
     name[:s]
   elsif choice == 'l'
     name[:l]
-  else choice == 'sp'
+  elsif choice == 'sp'
     name[:sp]
   end
 end
@@ -56,7 +56,7 @@ prompt('---Paper Rock Scissors--v2-Bonus-')
 
 loop do
   human_choice = ''
-  score = {human: 0, computer: 0}
+  score = { human: 0, computer: 0 }
 
   loop do
     loop do
@@ -80,7 +80,7 @@ loop do
     print_who_wins(human_choice, computer_choice)
     keep_score(human_choice, computer_choice, score)
     prompt("Current Score -> You: #{score[:human]} || Computer: #{score[:computer]}")
-    
+
     if score[:human] == 5
       prompt("Game over. You have won!")
       break
