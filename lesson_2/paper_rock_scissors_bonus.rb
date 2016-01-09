@@ -1,64 +1,94 @@
 # paper_rock_scissors.rb
 
-ACCEPTED_ANSWERS = %w(paper rock scissors)
-
-score_human = 0
-score_computer = 0
+ACCEPTED_ANSWERS = %w(p r s l sp)
+answers_long = {p: 'paper', r: 'rock', s: 'scissors', l: 'lizard', sp: 'spock'}
 
 def prompt(text)
   puts "=> #{text}"
 end
 
 def win?(player1, player2)
-  (player1 == 'paper' && player2 == 'rock') ||
-    (player1 == 'rock' && player2 == 'scissors') ||
-    (player1 == 'scissors' && player2 == 'paper')
+  (player1 == 'p' && player2 == 'r') ||
+  (player1 == 'p' && player2 == 'sp') ||
+  (player1 == 'r' && player2 == 's') ||
+  (player1 == 'r' && player2 == 'l') ||
+  (player1 == 's' && player2 == 'p') ||
+  (player1 == 's' && player2 == 'l') ||
+  (player1 == 'l' && player2 == 'p') ||
+  (player1 == 'l' && player2 == 'sp') ||
+  (player1 == 'sp' && player2 == 'r') ||
+  (player1 == 'sp' && player2 == 's')
 end
 
 def print_who_wins(human, computer)
   if win?(human, computer)
-    prompt('Congratulations, you won!')
+    prompt('Congratulations, you won that round!')
   elsif win?(computer, human)
-    prompt('Sorry, computer wins!')
+    prompt('Sorry, computer won that round!')
   else
-    prompt('The game was a draw!')
+    prompt('This round was a draw!')
   end
 end
 
-def keep_score(player1, player2, score1, score2)
+def keep_score(player1, player2, scores)
   if win?(player1, player2)
-    score1 += 1
+    scores[:human] += 1
   elsif win?(player2, player1)
-    score2 += 1
+    scores[:computer] +=1
   end
 end
 
+def short_name_to_long(choice, name)
+  if choice == 'p'
+    name[:p]
+  elsif choice == 'r'
+    name[:r]
+  elsif choice == 's'
+    name[:s]
+  elsif choice == 'l'
+    name[:l]
+  else choice == 'sp'
+    name[:sp]
+  end
+end
 
 prompt('---Paper Rock Scissors--v2-Bonus-')
 
 loop do
   human_choice = ''
+  score = {human: 0, computer: 0}
 
   loop do
-    prompt("Please choose one of the following: #{ACCEPTED_ANSWERS.join(' ,')}")
-    human_choice = gets.chomp.downcase
+    loop do
+      prompt("Choose: [p]aper, [r]ock, [s]cissors, [l]izard, [sp]ock}")
+      human_choice = gets.chomp.downcase
 
-    if ACCEPTED_ANSWERS.include?(human_choice)
+      if ACCEPTED_ANSWERS.include?(human_choice)
+        break
+      else
+        prompt('Sorry, that is not an acceptable choice.')
+      end
+    end
+
+    computer_choice = ACCEPTED_ANSWERS.sample
+
+    current_human_choice = short_name_to_long(human_choice, answers_long)
+    current_computer_choice = short_name_to_long(computer_choice, answers_long)
+
+    prompt("You selected: #{current_human_choice.upcase}. Computer selected: #{current_computer_choice.upcase}")
+
+    print_who_wins(human_choice, computer_choice)
+    keep_score(human_choice, computer_choice, score)
+    prompt("Current Score -> You: #{score[:human]} || Computer: #{score[:computer]}")
+    
+    if score[:human] == 5
+      prompt("Game over. You have won!")
       break
-    else
-      prompt('Sorry, that is not an acceptable choice.')
+    elsif score[:computer] == 5
+      prompt("Game over. Computer wins!")
+      break
     end
   end
-
-  computer_choice = ACCEPTED_ANSWERS.sample
-
-  prompt("You selected: #{human_choice.upcase}. Computer selected: #{computer_choice.upcase}")
-
-  print_who_wins(human_choice, computer_choice)
-
-  keep_score(human_choice, computer_choice, score_human, score_computer)
-
-  prompt("Current Score -> You: #{score_human} || Computer: #{score_computer}")
 
   puts "\n"
   prompt('Try again? [y]es')
